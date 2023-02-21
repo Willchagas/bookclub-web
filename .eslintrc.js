@@ -15,7 +15,10 @@ module.exports = {
     'react/prop-types': 'off',
     'react/no-unescaped-entities': 'off',
     'multiline-ternary': 'off',
+<<<<<<< HEAD
     'react/display-name': 'off',
+=======
+>>>>>>> main
     'no-extra-semi': 'off'
   },
   settings: {
