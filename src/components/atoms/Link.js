@@ -7,7 +7,12 @@ export const Link = ({ children, ...props }) => (
 )
 
 Link.Action = ({ text, actionText, ...props }) => (
-  <Flex w="100%" alignItems="center" justifyContent="center">
+  <Flex
+    flexDir={['column', 'row']}
+    w="100%"
+    alignItems="center"
+    justifyContent="center"
+  >
     <ChakraLink
       _hover={{ textDecoration: 'none', cursor: 'default' }}
       mr="7px"
