@@ -40,13 +40,14 @@ export const LoginScreen = () => {
           <Image src="/img/logo.svg" alt="BookClub Logo" w="160px" h="48px" />
           <Text.ScreenTitle mt="48px">Login</Text.ScreenTitle>
           <Input
+            type="email"
             id="email"
             name="email"
             value={values.email}
-            mt="28px"
-            placeholder="email@exemplo.com"
             onChange={handleChange}
             error={errors.email}
+            mt="28px"
+            placeholder="email@exemplo.com"
           />
           <Input.Password
             id="password"
