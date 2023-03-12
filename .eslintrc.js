@@ -15,7 +15,8 @@ module.exports = {
     'react/prop-types': 'off',
     'react/no-unescaped-entities': 'off',
     'multiline-ternary': 'off',
-    'react/display-name': 'off'
+    'react/display-name': 'off',
+    camelcase: 'off'
   },
   settings: {
     'import/resolver': {
