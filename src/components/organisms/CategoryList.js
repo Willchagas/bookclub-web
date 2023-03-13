@@ -5,11 +5,15 @@ import { Text } from 'components/atoms'
 import { CategoryCard, BookCard } from 'components/molecules'
 import { getCategories, getBooksByCategory } from 'services/api/requests'
 
-export const CategoryList = () => {
-  const [selected, setSelected] = useState()
+export const CategoryList = ({ title, categoryId }) => {
+  const [selected, setSelected] = useState(categoryId)
   const { data } = useQuery('categories', getCategories)
-  const bookQuery = useQuery(['booksById', selected], () =>
-    getBooksByCategory(selected)
+  const bookQuery = useQuery(
+    ['booksById', selected],
+    () => getBooksByCategory(selected),
+    {
+      enabled: !!selected
+    }
   )
 
   useEffect(() => {
@@ -26,19 +30,41 @@ export const CategoryList = () => {
       h="410px"
       textAlign="center"
     >
-      <Text.ScreenTitle>Categorias</Text.ScreenTitle>
-      <Flex mt="12px" flexDir="row">
-        {data?.data &&
-          data?.data.map((item) => (
-            <CategoryCard
-              key={`book_${item.id}`}
-              selected={selected === item.id}
-              onClick={() => setSelected(item.id)}
-              {...item}
-            />
-          ))}
-      </Flex>
-      <Flex mt="12px" flexDir="row">
+      <Text.ScreenTitle textAlign="left">
+        {title || 'Categorias'}
+      </Text.ScreenTitle>
+      {!categoryId && (
+        <Flex
+          overflowX="scroll"
+          mt="12px"
+          flexDir="row"
+          css={{
+            '::-webkit-scrollbar': {
+              display: 'none'
+            }
+          }}
+        >
+          {data?.data &&
+            data?.data.map((item) => (
+              <CategoryCard
+                key={`book_${item.id}`}
+                selected={selected === item.id}
+                onClick={() => setSelected(item.id)}
+                {...item}
+              />
+            ))}
+        </Flex>
+      )}
+      <Flex
+        overflowX="scroll"
+        mt="12px"
+        flexDir="row"
+        css={{
+          '::-webkit-scrollbar': {
+            display: 'none'
+          }
+        }}
+      >
         {bookQuery?.data &&
           bookQuery?.data?.data.map((item) => (
             <BookCard key={`book_${item.id}`} {...item} />
