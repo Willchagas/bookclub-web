@@ -1,50 +1,59 @@
 import { Text, MenuItem } from 'components/atoms'
 import { Avatar, Menu, MenuButton, MenuList, Flex } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+
 import { BsBookmarkHeart, BsClipboard2Check } from 'react-icons/bs'
 import { GiVampireDracula, GiCheckedShield, GiExitDoor } from 'react-icons/gi'
 import { HiOutlineDocumentText } from 'react-icons/hi'
 
 export const UserMenu = () => {
   const userStore = useSelector((state) => state.user)
+  const navigate = useNavigate()
 
   const menuOptions = [
     {
       id: 0,
       icon: BsBookmarkHeart,
       text: 'Favoritos',
-      divider: false
+      divider: false,
+      onClick: () => navigate('/favorites')
     },
     {
       id: 1,
       icon: GiVampireDracula,
       text: 'Dados Pessoais',
-      divider: false
+      divider: false,
+      onClick: () => navigate('/')
     },
     {
       id: 2,
       icon: GiCheckedShield,
       text: 'Alterar Senha',
-      divider: true
+      divider: true,
+      onClick: () => navigate('/')
     },
     {
       id: 3,
       icon: HiOutlineDocumentText,
       text: 'Termo de Uso',
-      divider: false
+      divider: false,
+      onClick: () => navigate('/')
     },
     {
       id: 4,
       icon: BsClipboard2Check,
       text: 'Política de Privacidade',
-      divider: true
+      divider: true,
+      onClick: () => navigate('/')
     },
     {
       id: 5,
       icon: GiExitDoor,
       text: 'Sair',
-      divider: false
+      divider: false,
+      onClick: () => navigate('/')
     }
   ]
 
@@ -71,7 +80,11 @@ export const UserMenu = () => {
       </MenuButton>
       <MenuList>
         {menuOptions.map((item) => (
-          <MenuItem key={`manu_item_${item.id}`} {...item} />
+          <MenuItem
+            onClick={() => item.onClick()}
+            key={`manu_item_${item.id}`}
+            {...item}
+          />
         ))}
       </MenuList>
     </Menu>
