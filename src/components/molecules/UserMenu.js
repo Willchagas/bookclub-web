@@ -8,7 +8,7 @@ import { BsBookmarkHeart, BsClipboard2Check } from 'react-icons/bs'
 import { GiVampireDracula, GiCheckedShield, GiExitDoor } from 'react-icons/gi'
 import { HiOutlineDocumentText } from 'react-icons/hi'
 
-export const UserMenu = () => {
+export const UserMenu = ({ setShowModal }) => {
   const userStore = useSelector((state) => state.user)
   const navigate = useNavigate()
 
@@ -25,14 +25,14 @@ export const UserMenu = () => {
       icon: GiVampireDracula,
       text: 'Dados Pessoais',
       divider: false,
-      onClick: () => navigate('/')
+      onClick: () => setShowModal('user')
     },
     {
       id: 2,
       icon: GiCheckedShield,
       text: 'Alterar Senha',
       divider: true,
-      onClick: () => navigate('/')
+      onClick: () => setShowModal('password')
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ export const UserMenu = () => {
       icon: BsClipboard2Check,
       text: 'Política de Privacidade',
       divider: true,
-      onClick: () => navigate('/')
+      onClick: () => setShowModal('privacy-policy')
     },
     {
       id: 5,

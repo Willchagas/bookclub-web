@@ -25,8 +25,9 @@ export const AuthorList = ({ data, isLoading }) => {
             <Spinner />
           </Flex>
         )}
-        {(!isLoading && data?.length === 0) ||
-          (!data && <Text> Nenhum autor encontrado!</Text>)}
+        {((!isLoading && data?.length === 0) || !data) && (
+          <Text> Nenhum autor encontrado!</Text>
+        )}
         {data &&
           data?.map((item) => (
             <AuthorCard key={`author_${item.id}`} {...item} />

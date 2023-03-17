@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
-import { Flex, Spinner } from '@chakra-ui/react'
-import { Text } from 'components/atoms'
+import { Flex } from '@chakra-ui/react'
+import { Text, EmptyMessage, Loader } from 'components/atoms'
 import { CategoryCard, BookCard } from 'components/molecules'
 import { getCategories, getBooksByCategory } from 'services/api/requests'
 
@@ -69,9 +69,9 @@ export const CategoryList = ({ title, categoryId }) => {
           }
         }}
       >
-        {isLoading && <Spinner />}
+        {isLoading && <Loader />}
         {!isLoading && bookQuery && bookQuery?.data?.length === 0 && (
-          <Text> Nenhum livro relacionado encontrado!</Text>
+          <EmptyMessage> Nenhum livro relacionado encontrado!</EmptyMessage>
         )}
         {bookQuery &&
           bookQuery?.data.map((item) => (
