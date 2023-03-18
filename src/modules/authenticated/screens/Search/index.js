@@ -19,8 +19,8 @@ export const SearchScreen = () => {
       <NavBar query={query} setQuery={setQuery} />
       <Flex
         flexDir="column"
-        alignItems={['center', 'flex-start']}
-        justifyContent={['center', 'flex-start']}
+        alignItems="flex-start"
+        justifyContent="flex-start"
         mt={['24px', '48px']}
         w="100%"
         maxW="100vw"
@@ -30,7 +30,17 @@ export const SearchScreen = () => {
           <Text.ScreenTitle>Resultados da Pesquisa:</Text.ScreenTitle>
         </Flex>
 
-        <Flex w="100%" alignItems="flex-start" justifyContent="flex-start">
+        <Flex
+          overflowX="scroll"
+          css={{
+            '::-webkit-scrollbar': {
+              display: 'none'
+            }
+          }}
+          w="100%"
+          alignItems="flex-start"
+          justifyContent="flex-start"
+        >
           <BookList
             title="Livros"
             data={data?.data?.books}
