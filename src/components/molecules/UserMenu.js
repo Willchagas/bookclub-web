@@ -8,7 +8,7 @@ import { BsBookmarkHeart, BsClipboard2Check } from 'react-icons/bs'
 import { GiVampireDracula, GiCheckedShield, GiExitDoor } from 'react-icons/gi'
 import { HiOutlineDocumentText } from 'react-icons/hi'
 
-export const UserMenu = ({ setShowModal }) => {
+export const UserMenu = ({ setShowModal, onLogout }) => {
   const userStore = useSelector((state) => state.user)
   const navigate = useNavigate()
 
@@ -39,7 +39,7 @@ export const UserMenu = ({ setShowModal }) => {
       icon: HiOutlineDocumentText,
       text: 'Termo de Uso',
       divider: false,
-      onClick: () => navigate('/')
+      onClick: () => setShowModal('terms')
     },
     {
       id: 4,
@@ -53,7 +53,7 @@ export const UserMenu = ({ setShowModal }) => {
       icon: GiExitDoor,
       text: 'Sair',
       divider: false,
-      onClick: () => navigate('/')
+      onClick: () => onLogout()
     }
   ]
 
