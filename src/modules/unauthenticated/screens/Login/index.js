@@ -8,11 +8,13 @@ import { useMutation } from 'react-query'
 import { loginCall } from 'services/api/requests'
 import { saveItem } from 'services/storage'
 import { setAll } from 'services/store/slices/user'
+import { useState } from 'react'
 
 export const LoginScreen = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const toast = useToast()
+  const [validationActive, setValidationActive] = useState(false)
 
   const mutation = useMutation((newUser) => loginCall(newUser), {
     onError: (error) => {
@@ -61,6 +63,11 @@ export const LoginScreen = () => {
     }
   })
 
+  const handleClick = () => {
+    setValidationActive(true)
+    handleSubmit()
+  }
+
   return (
     <Flex flexDir="row" w="100vw" h="100vh">
       <Flex
@@ -80,7 +87,7 @@ export const LoginScreen = () => {
             name="email"
             value={values.email}
             onChange={handleChange}
-            error={errors.email}
+            error={validationActive && errors.email}
             mt="28px"
             placeholder="email@exemplo.com"
           />
@@ -90,7 +97,7 @@ export const LoginScreen = () => {
             value={values.password}
             mt="16px"
             onChange={handleChange}
-            error={errors.password}
+            error={validationActive && errors.password}
           />
           <Flex
             mt="8px"
@@ -104,7 +111,7 @@ export const LoginScreen = () => {
           </Flex>
           <Button
             isLoading={mutation.isLoading}
-            onClick={handleSubmit}
+            onClick={handleClick}
             mt="24px"
           >
             Login

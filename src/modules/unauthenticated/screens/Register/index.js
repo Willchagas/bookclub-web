@@ -5,10 +5,13 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useMutation } from 'react-query'
 import { registerCall } from 'services/api/requests'
+import { useState } from 'react'
 
 export const RegisterScreen = () => {
   const navigate = useNavigate()
   const toast = useToast()
+  const [validationActive, setValidationActive] = useState(false)
+
   const mutation = useMutation((newUser) => registerCall(newUser), {
     onError: (error) => {
       toast({
@@ -58,6 +61,11 @@ export const RegisterScreen = () => {
     }
   })
 
+  const handleClick = () => {
+    setValidationActive(true)
+    handleSubmit()
+  }
+
   return (
     <Flex flexDir="row" w="100vw" h="100vh">
       <Flex
@@ -77,7 +85,7 @@ export const RegisterScreen = () => {
             name="name"
             value={values.name}
             onChange={handleChange}
-            error={errors.name}
+            error={validationActive && errors.name}
             mt="28px"
             placeholder="Nome completo"
           />
@@ -86,7 +94,7 @@ export const RegisterScreen = () => {
             name="email"
             value={values.email}
             onChange={handleChange}
-            error={errors.email}
+            error={validationActive && errors.email}
             mt="16px"
             placeholder="E-mail"
           />
@@ -95,7 +103,7 @@ export const RegisterScreen = () => {
             name="password"
             value={values.password}
             onChange={handleChange}
-            error={errors.password}
+            error={validationActive && errors.password}
             mt="16px"
             placeholder="Senha"
           />
@@ -104,14 +112,14 @@ export const RegisterScreen = () => {
             name="confirmPassword"
             value={values.confirmPassword}
             onChange={handleChange}
-            error={errors.confirmPassword}
+            error={validationActive && errors.confirmPassword}
             mt="16px"
             placeholder="Confirmar Senha"
           />
 
           <Button
             isLoading={mutation.isLoading}
-            onClick={handleSubmit}
+            onClick={handleClick}
             mt="24px"
           >
             Cadastrar
